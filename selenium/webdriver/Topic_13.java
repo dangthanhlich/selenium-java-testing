@@ -9,37 +9,35 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-//http://live.techpanda.org/index.php/
-
-public class Topic_10_xpath_css {
+public class Topic_13 {
+	//khai báo 1 biến đại diện cho selenium ưebdriver
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+		//khởi tạo browser lên
 		driver = new FirefoxDriver();
+		//set thời gian chờ để tìm được element
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		//mở trang facebook lên
+		driver.get("https://www.facebook.com/");
 	}
 
 	@Test
-	public void TC_01_Browser() {
-		//Action lên browser
-		//open browser
-		//open URL 
-		//refresh /Back/Forward
-		//Maximize/Minimize/ Fullscreen
-		//....
-		//lấy dữ liệu ra từ browser: trả về 1 kiểu dữ liệu nào đó để lưu trữ lại, nắm giữ dữ liệu đó
-		//Get URL /Get title /get source page/ get Position/ get location/...
+	public void TC_01() {
+		//ID 
+		driver.findElement(By.id("email")).sendKeys("thanhlichit1999@gmail.com");
+		sleepInSecond(3);
+		driver.findElement(By.id("pass")).sendKeys("1111");
+		sleepInSecond(3);
+	}
+
+	public void TC_02() {
 		
 	}
 
-	@Test
-	public void TC_02_Element() {
-		
-	}
-	@AfterClass
 	public void afterClass() {
 		driver.quit();
 	}
