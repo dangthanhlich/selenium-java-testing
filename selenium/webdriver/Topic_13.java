@@ -1,12 +1,9 @@
 package webdriver;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class Topic_13 {
@@ -14,28 +11,33 @@ public class Topic_13 {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 
-	@BeforeClass
-	public void beforeClass() {
-		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
-		//khởi tạo browser lên
-		driver = new FirefoxDriver();
-		//set thời gian chờ để tìm được element
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		//mở trang facebook lên
-		driver.get("https://www.facebook.com/");
-	}
+	
 
 	@Test
-	public void TC_01() {
-		//ID 
-		driver.findElement(By.id("email")).sendKeys("thanhlichit1999@gmail.com");
-		sleepInSecond(3);
-		driver.findElement(By.id("pass")).sendKeys("1111");
-		sleepInSecond(3);
-	}
-
-	public void TC_02() {
+	public void TC_01_Firefox() {
+		// Executable File ; chromedriver / geckodriver/ edgedriver / IEDriver/...
+		System.setProperty("webdriver.gecko.driver",projectPath + "\\browserDrivers\\geckodriver.exe");
 		
+		//class: firefoxDriver/chromeDriver /EdgeDriver/SafariDriver/...
+		driver = new FirefoxDriver();
+		driver.get("https://www.facebook.com/");
+		driver.quit();
+	}
+	@Test
+	public void TC_02_chrome() {
+		System.setProperty("webdriver.chrome.driver",projectPath + "\\browserDrivers\\chromedriver.exe");
+		
+		driver = new ChromeDriver();
+		driver.get("https://www.facebook.com/");
+		driver.quit();
+	}
+	@Test
+	public void TC_03_Edge() {
+		
+		System.setProperty("webdriver.edge.driver",projectPath + "\\browserDrivers\\msedgedriver.exe");
+		driver = new EdgeDriver();
+		driver.get("https://www.facebook.com/");
+		driver.quit();
 	}
 
 	public void afterClass() {
