@@ -1,6 +1,12 @@
 package Javabasic;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+
 public class Topic_13_data_Type {
+	Integer[] phone = {6955, 569};
 
 	public static void main(String[] args) {
 		// 2 loaị kiểu  dữ liệu
@@ -39,11 +45,23 @@ public class Topic_13_data_Type {
 		
 		// kiểu tham chiếu (Reference Type)
 		//object
+		Object o = new Object();
+		
 		//Aray
-		//Class
-		//collection 
+		String[]  addresses = { "Ha Noi", "sai gon", "Da Nang"};
+		Integer[] phone = {6955, 569};
+		long a[] = {10000L, 3000L,40000L,23456};
+		//class
+		Topic_13_data_Type topic = new Topic_13_data_Type();
+		
+		//Interface
+		WebDriver driver;
+		
+		//collection : List/set/queue
+		List<String> addresses = new ArrayList<String>();
 		//string - chuỗi kí tự
-		String name = "Automation  !@#$   123456";
+		String name = "Automation test";
+		String cityName = new String("Ho chi minh");
 
 	}
 
