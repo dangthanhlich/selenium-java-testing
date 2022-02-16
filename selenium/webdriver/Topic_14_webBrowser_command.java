@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -141,11 +142,11 @@ public class Topic_14_webBrowser_command {
 		
 	}
 	
-
+	@Test
 	public void TC_02() {
 		
 	}
-
+	@AfterClass
 	public void afterClass() {
 		driver.quit();
 	}

@@ -33,11 +33,11 @@ public class Topic_demo_all {
 		driver.findElement(By.id("pass")).sendKeys("1111");
 		sleepInSecond(3);
 	}
-
+	@Test
 	public void TC_02() {
 		
 	}
-
+	@AfterClass
 	public void afterClass() {
 		driver.quit();
 	}
