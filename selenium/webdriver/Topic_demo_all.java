@@ -22,7 +22,8 @@ public class Topic_demo_all {
 		//set thời gian chờ để tìm được element
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//mở trang facebook lên
-		driver.get("https://www.facebook.com/");
+//		driver.get("https://www.facebook.com/");
+		driver.manage().window().maximize();
 	}
 
 	@Test
