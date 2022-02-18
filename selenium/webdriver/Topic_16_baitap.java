@@ -1,5 +1,6 @@
 package webdriver;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -39,6 +40,7 @@ public class Topic_16_baitap {
 		driver.manage().window().maximize();
 	}
 
+	//lặp lại cho từng testcase
 	@BeforeMethod
 	public void beforeMethod() {
 		driver.get("https://alada.vn/tai-khoan/dang-ky.html/");
@@ -140,4 +142,6 @@ public class Topic_16_baitap {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }
