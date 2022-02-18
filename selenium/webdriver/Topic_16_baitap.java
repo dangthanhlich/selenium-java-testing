@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class Topic_15_baitap {
+public class Topic_16_baitap {
 	//khai báo 1 biến đại diện cho selenium ưebdriver
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
@@ -44,7 +44,7 @@ public class Topic_15_baitap {
 		driver.get("https://alada.vn/tai-khoan/dang-ky.html/");
 	}
 	@Test
-	public void TC_01_Register_Empty_Data() {
+	public void TC_01_Empty_Data() {
 		driver.findElement(fullNameTextboxBy).sendKeys("");
 		driver.findElement(emailTextboxBy).sendKeys("");
 		driver.findElement(confirmEmailTextboxBy).sendKeys("");
@@ -62,7 +62,7 @@ public class Topic_15_baitap {
 		Assert.assertEquals(driver.findElement(phoneErorMessage).getText(),"Vui lòng nhập số điện thoại.");
 	}
 	@Test
-	public void TC_02_Register_Invalid_Email() {
+	public void TC_02_Invalid_Email() {
 		driver.findElement(fullNameTextboxBy).sendKeys("Steve Job");
 		driver.findElement(emailTextboxBy).sendKeys("123456@1@23@");
 		driver.findElement(confirmEmailTextboxBy).sendKeys("123456@1@23@");
@@ -74,7 +74,7 @@ public class Topic_15_baitap {
 		Assert.assertEquals(driver.findElement(confirmEmailErorMessage).getText(),"Vui lòng nhập email hợp lệ");
 	}
 	@Test
-	public void TC_03_Register_Incorrect_confirm_Email() {
+	public void TC_03_Incorrect_confirm_Email() {
 		driver.findElement(fullNameTextboxBy).sendKeys("Steve Job");
 		driver.findElement(emailTextboxBy).sendKeys("123456@123");
 		driver.findElement(confirmEmailTextboxBy).sendKeys("123456@1@23@");
@@ -86,7 +86,7 @@ public class Topic_15_baitap {
 		Assert.assertEquals(driver.findElement(confirmEmailErorMessage).getText(),"Email nhập lại không đúng");
 	}
 	@Test
-	public void TC_04_Register_Invalid_password() {
+	public void TC_04_Invalid_password() {
 		driver.findElement(fullNameTextboxBy).sendKeys("Steve Job");
 		driver.findElement(emailTextboxBy).sendKeys("1234@123");
 		driver.findElement(confirmEmailTextboxBy).sendKeys("1234@123");
@@ -111,7 +111,7 @@ public class Topic_15_baitap {
 		Assert.assertEquals(driver.findElement(phoneErorMessage).getText(),"Vui lòng nhập phone hợp lệ");
 	}
 	@Test
-	public void TC_06_Register_Empty_Data() {
+	public void TC_06_Empty_Data() {
 		driver.findElement(fullNameTextboxBy).sendKeys("Steve Job");
 		driver.findElement(emailTextboxBy).sendKeys("123456@123");
 		driver.findElement(confirmEmailTextboxBy).sendKeys("123456@1@23@");
