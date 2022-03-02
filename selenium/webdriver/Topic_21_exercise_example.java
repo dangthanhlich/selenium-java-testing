@@ -1,23 +1,18 @@
 package webdriver;
 
-import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_21_exercise {
+public class Topic_21_exercise_example {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	JavascriptExecutor jsExecutor;
@@ -28,7 +23,6 @@ public class Topic_21_exercise {
 		driver = new FirefoxDriver();
 		jsExecutor = (JavascriptExecutor) driver;
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
 	}
 
 //	@Test
@@ -124,112 +118,49 @@ public class Topic_21_exercise {
 //	}
 	
 	
-//	@Test
-//	public void TC_03_Default_Checkbox() {
-//		driver.get("https://demos.telerik.com/kendo-ui/checkbox/index");
-//		
-//		By luggageCheckbox = By.xpath("//label[text()='Luggage compartment cover']//preceding-sibling::input");
-//		By heatedCheckbox = By.xpath("//label[text()='Heated front and rear seats']//preceding-sibling::input");
-//		By towbarCheckbox = By.xpath("//label[text()='Towbar preparation']//preceding-sibling::input");
-//		By leatherCheckbox = By.xpath("//label[text()='Leather trim']//preceding-sibling::input");
-//		
-//		//select
-//		checkToCheckbox(luggageCheckbox);
-//		checkToCheckbox(heatedCheckbox);
-//		
-//		//Selected
-//		Assert.assertTrue(isElementSelected(luggageCheckbox));
-//		Assert.assertTrue(isElementSelected(heatedCheckbox));
-//		Assert.assertTrue(isElementSelected(leatherCheckbox));
-//		
-//		//Disabled 
-//		Assert.assertFalse(isElementEnabled(towbarCheckbox));
-//		Assert.assertFalse(isElementEnabled(leatherCheckbox));
-//		
-//		//De-select
-//		uncheckToCheckbox(luggageCheckbox);
-//		uncheckToCheckbox(heatedCheckbox);
-//		
-//		//De-selected
-//		Assert.assertFalse(isElementSelected(luggageCheckbox));
-//		Assert.assertFalse(isElementSelected(heatedCheckbox));
-//		Assert.assertFalse(isElementSelected(towbarCheckbox));
-//		
-//		
-//	}
-	
 	@Test
-	public void TC_04_Multiple_checkbox() {
-		driver.get("https://automationfc.github.io/multiple-fields/");
+	public void TC_03_Default_Checkbox() {
+		driver.get("https://demos.telerik.com/kendo-ui/checkbox/index");
 		
-		List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
-		System.out.println("checkbox size" + checkboxes.size());
+		By luggageCheckbox = By.xpath("//label[text()='Luggage compartment cover']//preceding-sibling::input");
+		By heatedCheckbox = By.xpath("//label[text()='Heated front and rear seats']//preceding-sibling::input");
+		By towbarCheckbox = By.xpath("//label[text()='Towbar preparation']//preceding-sibling::input");
+		By leatherCheckbox = By.xpath("//label[text()='Leather trim']//preceding-sibling::input");
 		
-		// Action-select
-		for(WebElement checkbox: checkboxes) {
-			if(!checkbox.isSelected()) {
-				checkbox.click();
-				sleepMiliSecond(300);
-			}
+		//select
+		if(!driver.findElement(luggageCheckbox).isSelected()) {
+			driver.findElement(luggageCheckbox).click();
 		}
-		//verify -selected
-		for(WebElement checkbox: checkboxes) {
-			Assert.assertTrue(checkbox.isSelected());
+		if(!driver.findElement(heatedCheckbox).isSelected()) {
+			driver.findElement(heatedCheckbox).click();
 		}
 		
-		// Action-select
-		for(WebElement checkbox: checkboxes) {
-			if(checkbox.isSelected()) {
-				checkbox.click();
-				sleepMiliSecond(300);
-			}
-		}
-		//verify -selected
-		for(WebElement checkbox: checkboxes) {
-			Assert.assertFalse(checkbox.isSelected());
-		}
-	}
-	
-	public void checkToCheckbox(By by)
-	{
-		if(!driver.findElement(by).isSelected())
+		//Selected
+		Assert.assertTrue(driver.findElement(luggageCheckbox).isSelected());
+		Assert.assertTrue(driver.findElement(heatedCheckbox).isSelected());
+		Assert.assertTrue(driver.findElement(leatherCheckbox).isSelected());
+		
+		//Disabled 
+		Assert.assertFalse(driver.findElement(towbarCheckbox).isEnabled());
+		Assert.assertFalse(driver.findElement(leatherCheckbox).isEnabled());
+		
+		//De-select
+		if(driver.findElement(luggageCheckbox).isSelected())
 		{
-			driver.findElement(by).click();
+			driver.findElement(luggageCheckbox).click();
 		}
-	}
-	
-	public void uncheckToCheckbox(By by)
-	{
-		if(driver.findElement(by).isSelected())
-		{
-			driver.findElement(by).click();
+		
+		if(driver.findElement(heatedCheckbox).isSelected()) {
+			driver.findElement(heatedCheckbox).click();
 		}
+		
+		//De-selected
+		Assert.assertFalse(driver.findElement(luggageCheckbox).isSelected());
+		Assert.assertFalse(driver.findElement(heatedCheckbox).isSelected());
+		Assert.assertFalse(driver.findElement(towbarCheckbox).isSelected());
+		
+		
 	}
-	
-	public boolean isElementSelected(By by)
-	{
-		if(driver.findElement(by).isSelected())
-		{
-			return true;
-		}else {
-			return false;
-		}
-	}
-	
-	public boolean isElementEnabled(By by)
-	{
-		if(driver.findElement(by).isEnabled())
-		{
-			return true;
-		}else {
-			return false;
-		}
-	}
-	
-	
-	
-	
-	
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
@@ -238,13 +169,6 @@ public class Topic_21_exercise {
 	public void sleepInSecond(long second) {
 		try {
 			Thread.sleep(second * 1000);
-		}catch(InterruptedException e){
-			e.printStackTrace();
-		}
-	}
-	public void sleepMiliSecond(long milisecond) {
-		try {
-			Thread.sleep(milisecond);
 		}catch(InterruptedException e){
 			e.printStackTrace();
 		}
