@@ -47,8 +47,13 @@ public class Topic_20_fix_error {
 		WebElement element = driver.findElement(By.cssSelector("ng-select[bindvalue='provinceCode'] span.ng-arrow-wrapper"));
 		jsExecutor.executeScript(" arguments[0].scrollIntoView(true);",element);
 		sleepInSecond(4);
-		driver.findElement(By.cssSelector("ng-select[bindvalue='provinceCode'] span.ng-arrow-wrapper")).click();
+		
+		driver.findElement(By.cssSelector("div.container-hotline a span")).click();
 		sleepInSecond(4);
+		
+//		driver.findElement(By.cssSelector("ng-select[bindvalue='provinceCode'] span.ng-arrow-wrapper")).click();
+//		sleepInSecond(4);
+		
 		
 	}
 	
