@@ -20,18 +20,29 @@ import org.testng.annotations.Test;
 public class Topic_21_exercise {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
+	String osName = System.getProperty("os.name");
 	JavascriptExecutor jsExecutor;
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+		if(osName.startsWith("Windows")) {
+			//Windows
+			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+		}else if(osName.startsWith("Mac")){
+			//mac
+			System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver_mac");
+		}
+		else{
+			//linux
+			System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver_linux");
+		}
 		driver = new FirefoxDriver();
 		jsExecutor = (JavascriptExecutor) driver;
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
 
-//	@Test
+
 //	public void TC_01_Button() {
 //		driver.get("https://www.fahasa.com/customer/account/create");
 //		
@@ -80,7 +91,7 @@ public class Topic_21_exercise {
 //		
 //		
 //	}
-//	@Test
+//
 //	public void TC_02_Default_Radio() {
 //		//Default - the input
 //		//Action: click
@@ -122,9 +133,9 @@ public class Topic_21_exercise {
 //		
 //		
 //	}
-	
-	
-//	@Test
+//	
+//	
+//
 //	public void TC_03_Default_Checkbox() {
 //		driver.get("https://demos.telerik.com/kendo-ui/checkbox/index");
 //		
@@ -157,38 +168,133 @@ public class Topic_21_exercise {
 //		
 //		
 //	}
+//	
+//	
+//	public void TC_04_Multiple_checkbox() {
+//		driver.get("https://automationfc.github.io/multiple-fields/");
+//		
+//		List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
+//		System.out.println("checkbox size" + checkboxes.size());
+//		
+//		// Action-select
+//		for(WebElement checkbox: checkboxes) {
+//			if(!checkbox.isSelected()) {
+//				checkbox.click();
+//				sleepMiliSecond(300);
+//			}
+//		}
+//		//verify -selected
+//		for(WebElement checkbox: checkboxes) {
+//			Assert.assertTrue(checkbox.isSelected());
+//		}
+//		
+//		// Action-select
+//		for(WebElement checkbox: checkboxes) {
+//			if(checkbox.isSelected()) {
+//				checkbox.click();
+//				sleepMiliSecond(300);
+//			}
+//		}
+//		//verify -selected
+//		for(WebElement checkbox: checkboxes) {
+//			Assert.assertFalse(checkbox.isSelected());
+//		}
+//	}
+//	
+//	
+//	public void TC_05_Custom_Radio()
+//	{
+//		driver.get("https://material.angular.io/components/radio/examples");
+//		
+//		//Default  Radia /Check box
+//		//Action :selenium webElement click()
+//		//Verify:isSelected()
+//		
+//		//1 element phải define tới 2 locator
+//		// dễ bị nhầm lẫn :team member họ dùng -> hiểu nhầm//bải trì code nhiều
+//		//case 1 : dùng thẻ input
+//	//	selenium click();-> Eroe elementnotInteractableException
+//	//	isSelected()->work
+//		
+//		//Case 2 : use span
+//		//selenium click();->work
+//		//isSelected()-> nope work
+//		//case 3: use span - click()
+//		//use input - isSelected()
+//		
+//		//case 4: use input
+//		//javascript - click () (care  element hide/show)
+//		//isSelected- verify
+//		
+//		By winterCheckboxInput = By.cssSelector("input[value='Winter']");
+//		clickByJavascript(winterCheckboxInput);
+//		sleepMiliSecond(2);
+//		
+//		Assert.assertTrue(driver.findElement(winterCheckboxInput).isSelected());
+//
+//		
+//	}
 	
+//	@Test
+//	public void TC_06_Custom_Checckbox()
+//	{
+//		driver.get("https://material.angular.io/components/checkbox/examples");
+//		
+//		By checkedCheckbox = By.xpath("//span[text()='Checked']/preceding-sibling::span/input");
+//		By indeterminateCheckbox = By.xpath("//span[text()='Indeterminate']/preceding-sibling::span/input");
+//		
+//		clickByJavascript(checkedCheckbox);
+//		sleepInSecond(2);
+//		
+//		clickByJavascript(indeterminateCheckbox);
+//		sleepInSecond(2);
+//		
+//		Assert.assertTrue(isElementSelected(checkedCheckbox));
+//		Assert.assertTrue(isElementSelected(indeterminateCheckbox));
+//		sleepInSecond(2);
+//		
+//		clickByJavascript(checkedCheckbox);
+//		sleepInSecond(2);
+//		
+//		clickByJavascript(indeterminateCheckbox);
+//		sleepInSecond(2);
+//		
+//		Assert.assertFalse(isElementSelected(checkedCheckbox));
+//		Assert.assertFalse(isElementSelected(indeterminateCheckbox));
+//		sleepInSecond(2);
+//		
+//		
+//	}
 	@Test
-	public void TC_04_Multiple_checkbox() {
-		driver.get("https://automationfc.github.io/multiple-fields/");
+	
+	public void TC_07_Custom_Radio()
+	{
+		driver.get("https://tiemchungcovid19.gov.vn/portal/register-person");
 		
-		List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
-		System.out.println("checkbox size" + checkboxes.size());
+		By mySelfRadio = By.xpath("//div[text()='Đăng ký bản thân']//preceding-sibling::div/input");
+		By myFamilyadio = By.xpath("//div[text()='Đăng ký cho người thân']//preceding-sibling::div/input");
 		
-		// Action-select
-		for(WebElement checkbox: checkboxes) {
-			if(!checkbox.isSelected()) {
-				checkbox.click();
-				sleepMiliSecond(300);
-			}
-		}
-		//verify -selected
-		for(WebElement checkbox: checkboxes) {
-			Assert.assertTrue(checkbox.isSelected());
-		}
+		clickByJavascript(myFamilyadio);
+		sleepInSecond(2);
 		
-		// Action-select
-		for(WebElement checkbox: checkboxes) {
-			if(checkbox.isSelected()) {
-				checkbox.click();
-				sleepMiliSecond(300);
-			}
-		}
-		//verify -selected
-		for(WebElement checkbox: checkboxes) {
-			Assert.assertFalse(checkbox.isSelected());
-		}
+		Assert.assertTrue(driver.findElement(By.xpath("//input[@formcontrolname='registerFullname']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//input[@formcontrolname='registerPhoneNumber']")).isDisplayed());
+		
+		clickByJavascript(mySelfRadio);
+		sleepInSecond(2);
+		
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		Assert.assertEquals(driver.findElements(By.xpath("//input[@formcontrolname='registerFullname']")).size(), 0);
+		Assert.assertEquals(driver.findElements(By.xpath("//input[@formcontrolname='registerPhoneNumber']")).size(), 0);
+		
+		
 	}
+	
+	public void clickByJavascript(By by) {
+		jsExecutor.executeScript("arguments[0].click()", driver.findElement(by));
+		
+	}
+	
 	
 	public void checkToCheckbox(By by)
 	{
