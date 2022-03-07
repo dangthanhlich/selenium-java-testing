@@ -265,29 +265,98 @@ public class Topic_21_exercise {
 //		
 //		
 //	}
-	@Test
 	
-	public void TC_07_Custom_Radio()
+//	@Test
+//	public void TC_07_Custom_Radio()
+//	{
+//		driver.get("https://tiemchungcovid19.gov.vn/portal/register-person");
+//		
+//		By mySelfRadio = By.xpath("//div[text()='Đăng ký bản thân']//preceding-sibling::div/input");
+//		By myFamilyadio = By.xpath("//div[text()='Đăng ký cho người thân']//preceding-sibling::div/input");
+//		
+//		clickByJavascript(myFamilyadio);
+//		sleepInSecond(2);
+//		
+//		Assert.assertTrue(driver.findElement(By.xpath("//input[@formcontrolname='registerFullname']")).isDisplayed());
+//		Assert.assertTrue(driver.findElement(By.xpath("//input[@formcontrolname='registerPhoneNumber']")).isDisplayed());
+//		
+//		clickByJavascript(mySelfRadio);
+//		sleepInSecond(2);
+//		
+//		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+//		Assert.assertEquals(driver.findElements(By.xpath("//input[@formcontrolname='registerFullname']")).size(), 0);
+//		Assert.assertEquals(driver.findElements(By.xpath("//input[@formcontrolname='registerPhoneNumber']")).size(), 0);
+//	}
+	
+	@Test
+	public void TC_08_Custom_Radio_Google_Doc()
 	{
-		driver.get("https://tiemchungcovid19.gov.vn/portal/register-person");
+		driver.get("https://docs.google.com/forms/d/e/1FAIpQLSfiypnd69zhuDkjKgqvpID9kwO29UCzeCVrGGtbNPZXQok0jA/viewform");
 		
-		By mySelfRadio = By.xpath("//div[text()='Đăng ký bản thân']//preceding-sibling::div/input");
-		By myFamilyadio = By.xpath("//div[text()='Đăng ký cho người thân']//preceding-sibling::div/input");
+		By haiPhongCityRadio = By.xpath("//div[@aria-label='Hải Phòng']");
+		By quangNamCityCheckbox = By.xpath("//div[@aria-label='Quảng Nam']");
+		By quangBinhCityCheckbox = By.xpath("//div[@aria-label='Quảng Bình']");
 		
-		clickByJavascript(myFamilyadio);
+//		Assert.assertEquals(driver.findElement(haiPhongCityRadio).getAttribute("aria-checked"),"false");
+//		Assert.assertEquals(driver.findElement(quangNamCityCheckbox).getAttribute("aria-checked"),"false");
+//		Assert.assertEquals(driver.findElement(quangBinhCityCheckbox).getAttribute("aria-checked"),"false");
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@aria-label='Hải Phòng' and @aria-checked='false']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@aria-label='Quảng Nam' and @aria-checked='false']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@aria-label='Quảng Bình' and @aria-checked='false']")).isDisplayed());
+		
+		driver.findElement(haiPhongCityRadio).click();
 		sleepInSecond(2);
 		
-		Assert.assertTrue(driver.findElement(By.xpath("//input[@formcontrolname='registerFullname']")).isDisplayed());
-		Assert.assertTrue(driver.findElement(By.xpath("//input[@formcontrolname='registerPhoneNumber']")).isDisplayed());
-		
-		clickByJavascript(mySelfRadio);
+		driver.findElement(quangNamCityCheckbox).click();
 		sleepInSecond(2);
 		
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-		Assert.assertEquals(driver.findElements(By.xpath("//input[@formcontrolname='registerFullname']")).size(), 0);
-		Assert.assertEquals(driver.findElements(By.xpath("//input[@formcontrolname='registerPhoneNumber']")).size(), 0);
+		driver.findElement(quangBinhCityCheckbox).click();
+		sleepInSecond(2);
 		
 		
+		
+//		Assert.assertEquals(driver.findElement(haiPhongCityRadio).getAttribute("aria-checked"),"true");
+//		Assert.assertEquals(driver.findElement(quangNamCityCheckbox).getAttribute("aria-checked"),"true");
+//		Assert.assertEquals(driver.findElement(quangBinhCityCheckbox).getAttribute("aria-checked"),"true");
+		
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@aria-label='Hải Phòng' and @aria-checked='true']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@aria-label='Quảng Nam' and @aria-checked='true']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@aria-label='Quảng Bình' and @aria-checked='true']")).isDisplayed());
+
+		
+	
+	}
+	
+	@Test
+	public void TC_08_B_c2_Custom_Radio_Google_Doc()
+	{
+		driver.get("https://docs.google.com/forms/d/e/1FAIpQLSfiypnd69zhuDkjKgqvpID9kwO29UCzeCVrGGtbNPZXQok0jA/viewform");
+		
+		By haiPhongCityRadio = By.xpath("//div[@aria-label='Hải Phòng']");
+		By quangNamCityCheckbox = By.xpath("//div[@aria-label='Quảng Nam']");
+		By quangBinhCityCheckbox = By.xpath("//div[@aria-label='Quảng Bình']");
+		
+		Assert.assertEquals(driver.findElement(haiPhongCityRadio).getAttribute("aria-checked"),"false");
+		Assert.assertEquals(driver.findElement(quangNamCityCheckbox).getAttribute("aria-checked"),"false");
+		Assert.assertEquals(driver.findElement(quangBinhCityCheckbox).getAttribute("aria-checked"),"false");
+		
+		driver.findElement(haiPhongCityRadio).click();
+		sleepInSecond(2);
+		
+		driver.findElement(quangNamCityCheckbox).click();
+		sleepInSecond(2);
+		
+		driver.findElement(quangBinhCityCheckbox).click();
+		sleepInSecond(2);
+		
+		
+		
+		Assert.assertEquals(driver.findElement(haiPhongCityRadio).getAttribute("aria-checked"),"true");
+		Assert.assertEquals(driver.findElement(quangNamCityCheckbox).getAttribute("aria-checked"),"true");
+		Assert.assertEquals(driver.findElement(quangBinhCityCheckbox).getAttribute("aria-checked"),"true");
+
+		
+	
 	}
 	
 	public void clickByJavascript(By by) {
