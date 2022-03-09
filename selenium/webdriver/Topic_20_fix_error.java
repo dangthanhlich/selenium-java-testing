@@ -44,7 +44,7 @@ public class Topic_20_fix_error {
 	@Test
 	public void TC_04_Angular() {
 		driver.get("https://tiemchungcovid19.gov.vn/portal/register-person");
-		
+		//dùng đúng:jsExecutor.executeScript(" arguments[0].scrollIntoView(true);",driver.findElement(By.xpath("//button[text()='Double click me']")));
 		WebElement element = driver.findElement(By.cssSelector("ng-select[bindvalue='provinceCode'] span.ng-arrow-wrapper"));
 		
 		jsExecutor.executeScript(" arguments[0].scrollIntoView(true);",element);
