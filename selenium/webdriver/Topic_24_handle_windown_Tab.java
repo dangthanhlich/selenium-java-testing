@@ -17,12 +17,23 @@ import org.testng.annotations.Test;
 public class Topic_24_handle_windown_Tab {
 	WebDriver driver;
 	Actions action;
+	String osName = System.getProperty("os.name");
 	String projectPath = System.getProperty("user.dir");
 	
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+		if(osName.startsWith("Windows")) {
+			//Windows
+			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+		}else if(osName.startsWith("Mac")){
+			//mac
+			System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver_mac");
+		}
+		else{
+			//linux
+			System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver_linux");
+		}
 		driver = new FirefoxDriver();
 		action = new Actions(driver);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
