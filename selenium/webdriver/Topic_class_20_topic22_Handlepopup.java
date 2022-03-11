@@ -91,7 +91,7 @@ public class Topic_class_20_topic22_Handlepopup {
 		Assert.assertFalse(isElementDisplay(homePopup));
 	}
 	
-	@Test 
+	
 	public void TC_03_Random_Popup_In_Dom() {
 		driver.get("https://blog.testproject.io/");
 		sleepInSecond(30);
@@ -109,6 +109,21 @@ public class Topic_class_20_topic22_Handlepopup {
 			Assert.assertTrue(article.getText().contains("Selenium"));
 		}
 		
+	}
+	
+	@Test 
+	public void TC_02_Shoppe() {
+		driver.get("https://shopee.vn/");
+		By homePopup = By.xpath("//img[@class='banner-image']");
+		//verify signin popup in displayed
+		
+		Assert.assertTrue(isElementDisplayed(homePopup));
+		
+		driver.findElement(By.cssSelector(".shopee-popup__close-btn")).click();
+		sleepInSecond(3);
+		
+		//Verify signin popup is not displayed
+		Assert.assertFalse(isElementDisplayed(homePopup));
 	}
 	  
 	public boolean isElementDisplayed(By by)
