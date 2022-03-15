@@ -73,7 +73,7 @@ public class Topic_class20_topic24_Handle_windows_tab {
 		
 	}
 	
-	@Test
+	
 	public void TC_02_Kyna() {
 		driver.get("https://kyna.vn/");
 		String parentTabID = driver.getWindowHandle();
@@ -102,6 +102,27 @@ public class Topic_class20_topic24_Handle_windows_tab {
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='title-faq']")).isDisplayed());
 		
 		//closeAllTabwithoutParent(parentID);
+		
+	}
+	
+	@Test
+	public void TC_03_LiveGuru()
+	{
+		driver.get("http://live.techpanda.org/");
+		driver.findElement(By.xpath("//a[text()='Mobile']")).click();
+		
+		String parentID= driver.getWindowHandle();
+		
+		driver.findElement(By.xpath("//a[text()='IPhone']/parent::h2/following-sibling::div[@class='actions']//a[@class='link-compare']")).click();
+		Assert.assertTrue(driver.findElement(By.xpath("//span[text()='The product IPhone has been added to comparison list.']")).isDisplayed());
+		
+		driver.findElement(By.xpath("//a[text()='Samsung Galaxy']/parent::h2/following-sibling::div[@class='actions']//a[@class='link-compare']")).click();
+		Assert.assertTrue(driver.findElement(By.xpath("//span[text()='The product Samsung Galaxy has been added to comparison list.']")).isDisplayed());
+	
+		driver.findElement(By.xpath("//button[@title='Compare']")).click();
+		switchToWindowById(parentID);
+		
+		Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/catalog/product_compare/index/");
 		
 	}
 	
