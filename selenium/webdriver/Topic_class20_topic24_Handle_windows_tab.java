@@ -73,13 +73,13 @@ public class Topic_class20_topic24_Handle_windows_tab {
 		
 	}
 	
-	
+	@Test
 	public void TC_02_Kyna() {
 		driver.get("https://kyna.vn/");
-		String parentTabID = driver.getWindowHandle();
+		String parentID = driver.getWindowHandle();
 		
 		driver.findElement(By.xpath("//div[@id='k-footer']//img[@alt='facebook']")).click();
-		switchToWindowById(parentTabID);
+		switchToWindowById(parentID);
 		//switch qua parent (kyna.vn)
 		sleepInSecond(5);
 		
@@ -88,12 +88,14 @@ public class Topic_class20_topic24_Handle_windows_tab {
 		//Click to danh sach khoa hoc-tab moi
 		sleepInSecond(10);
 		driver.findElement(By.xpath("//div[@id='k-footer']//a[text()='Danh sách khóa học']")).click();
-		switchToWindowByTitle("Tổng hợp Tất Cả Khóa Học Online mới nhất tại Kyna");
+		//switchToWindowByTitle("Tổng hợp Tất Cả Khóa Học Online mới nhất tại Kyna");
 		
 		driver.findElement(By.id("live-search-bar")).sendKeys("Automation test FC");
 		sleepInSecond(5);
 		
-		switchToWindowByTitle("Kyna.vn - Học online cùng chuyên gia");
+		//switchToWindowById(parentTabID);
+		
+		//switchToWindowByTitle("Kyna.vn - Học online cùng chuyên gia");
 		
 		sleepInSecond(10);
 		driver.findElement(By.xpath("//div[@id='k-footer']//a[text()='Câu hỏi thường gặp']")).click();
@@ -101,11 +103,11 @@ public class Topic_class20_topic24_Handle_windows_tab {
 		sleepInSecond(10);
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='title-faq']")).isDisplayed());
 		
-		//closeAllTabwithoutParent(parentID);
+		closeAllTabwithoutParent(parentID);
 		
 	}
 	
-	@Test
+	
 	public void TC_03_LiveGuru()
 	{
 		driver.get("http://live.techpanda.org/");
@@ -176,7 +178,7 @@ public class Topic_class20_topic24_Handle_windows_tab {
 	
 	@AfterClass
 	public void afterClass() {
-		driver.quit();
+		//driver.quit();
 	}
 	
 	public void sleepInSecond(long second) {
