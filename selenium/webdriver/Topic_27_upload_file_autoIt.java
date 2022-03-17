@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -26,22 +27,25 @@ public class Topic_27_upload_file_autoIt {
 	String ApleFilePath = projectPath + "\\up_load_file\\"+ ApleFiName;
 	
 	String firefoxOneAutoIT = projectPath + "\\AutoIT\\firefoxUploadOneTime.exe";
+	String ChormeOneAutoIT = projectPath + "\\AutoIT\\chromeUploadOneTime.exe";
 	
 
 	@BeforeClass
 	public void beforeClass() {
-		if(osName.startsWith("Windows")) {
-			//Windows
-			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
-		}else if(osName.startsWith("Mac")){
-			//mac
-			System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver_mac");
-		}
-		else{
-			//linux
-			System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver_linux");
-		}
-		driver = new FirefoxDriver();
+//		if(osName.startsWith("Windows")) {
+//			//Windows
+//			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+//		}else if(osName.startsWith("Mac")){
+//			//mac
+//			System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver_mac");
+//		}
+//		else{
+//			//linux
+//			System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver_linux");
+//		}
+//		driver = new FirefoxDriver();
+		System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
@@ -52,7 +56,8 @@ public class Topic_27_upload_file_autoIt {
 		//Bật  được file dialog ->click vào button
 		
 		driver.findElement(By.cssSelector(".btn-success"));
-		Runtime.getRuntime().exec(new String[] { firefoxOneAutoIT, googleFilePath});
+		//Runtime.getRuntime().exec(new String[] { firefoxOneAutoIT, googleFilePath});
+		Runtime.getRuntime().exec(new String[] { ChormeOneAutoIT, googleFilePath});
 		sleepInSecond(10);
 		//verify file loaded sucess 
 		Assert.assertTrue(driver.findElement(By.xpath("//p[@class='name' and text()='"+ googleFiName +"']")).isDisplayed());
