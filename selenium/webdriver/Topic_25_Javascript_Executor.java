@@ -46,6 +46,7 @@ public class Topic_25_Javascript_Executor {
 	public void TC_01_live_Guru() {
 		navigateToUrlByJS("http://live.techpanda.org/");
 		//url
+		sleepInSecond(5);
 		String liveGuruDomain =(String) executeForBrowser("return document.domain;");
 		
 		Assert.assertEquals(liveGuruDomain, "live.techpanda.org");
@@ -54,29 +55,158 @@ public class Topic_25_Javascript_Executor {
 		Assert.assertEquals(liveGuruURL, "http://live.techpanda.org/");
 		
 		clickToElementByJS("//a[text()='Mobile']");
-		
+		sleepInSecond(5);
 		clickToElementByJS("//a[text()='Samsung Galaxy']/parent::h2/following-sibling::div[@class='actions']/button");
-		
+		sleepInSecond(5);
 		Assert.assertTrue(areExpectedTextInInnerText("Samsung Galaxy was added to your shopping cart."));
 		
 		clickToElementByJS("//a[text()='Customer Service']");
-		
+		sleepInSecond(5);
 		scrollToElementOnDown("//input[@id='newsletter']");
 		
 		sendkeyToElementByJS("//input[@id='newsletter']",getRandomEmail());
-		
+		sleepInSecond(5);
 		clickToElementByJS("//button[@title='Subscribe']");
-		
+		sleepInSecond(5);
 		Assert.assertTrue(areExpectedTextInInnerText("Thank you for your subscription."));
 		
 		//Chuyển sang domain mới
 		navigateToUrlByJS("https://demo.guru99.com/v4/");
+		sleepInSecond(5);
 		//chờ 
 		explicitWait.until(ExpectedConditions.urlToBe("https://demo.guru99.com/v4/"));
 		Assert.assertEquals(executeForBrowser("return document.domain;"),"demo.guru99.com");
 	}
+
+	public void TC_02_Validation_Mesage() {
+		navigateToUrlByJS("https://automationfc.github.io/html5/index.html");
+		
+		clickToElementByJS("//input[@name='submit-btn']");
+		sleepInSecond(10);
+		// hướng dẫn lấy validate .vào console 
+		//var element = $x("//input[@id='fname']")[0];
+		//element.validationMessage;-> lấy ra được : Please fill out this field.
+		Assert.assertEquals(getElementValidationMessage("//input[@id='fname']"),"Please fill out this field.");
+		
+		sendkeyToElementByJS("//input[@id='fname']","Automation FC");
+		sleepInSecond(3);
+		
+		clickToElementByJS("//input[@name='submit-btn']");
+		sleepInSecond(3);
+		Assert.assertEquals(getElementValidationMessage("//input[@id='pass']"),"Please fill out this field.");
+		
+		sendkeyToElementByJS("//input[@id='pass']","123456");
+		sleepInSecond(3);
+		
+		clickToElementByJS("//input[@name='submit-btn']");
+		sleepInSecond(3);
+		Assert.assertEquals(getElementValidationMessage("//input[@id='em']"),"Please fill out this field.");
+		
+		sendkeyToElementByJS("//input[@id='em']","123");
+		sleepInSecond(3);
+		clickToElementByJS("//input[@name='submit-btn']");
+		Assert.assertEquals(getElementValidationMessage("//input[@id='em']"),"Please enter an email address.");
+		
+		sendkeyToElementByJS("//input[@id='em']","123@123");
+		sleepInSecond(3);
+		clickToElementByJS("//input[@name='submit-btn']");
+		Assert.assertEquals(getElementValidationMessage("//input[@id='em']"),"Please match the requested format.");
+		
+		
+		sendkeyToElementByJS("//input[@id='em']","123!@#$%");
+		sleepInSecond(3);
+		
+		clickToElementByJS("//input[@name='submit-btn']");
+		Assert.assertEquals(getElementValidationMessage("//input[@id='em']"),"Please enter an email address.");
+		
+		
+		sendkeyToElementByJS("//input[@id='em']","123@234.567");
+		sleepInSecond(3);
+		
+		clickToElementByJS("//input[@name='submit-btn']");
+		Assert.assertEquals(getElementValidationMessage("//select"),"Please select an item in the list.");
+		
+	}
+	
+	
+	public void TC_03_New_Customer(){
+		navigateToUrlByJS("https://demo.guru99.com/v4/");
+		
+		String emailAddress, loginPageUrl, userID, password, gender;
+		String name, dateOfBirth, address, city,state,pin ,phone;
+		
+		By nameTextbox = By.name("name");
+		By genderRadio = By.xpath("//input[@value='m']");
+		By genderTextbox = By.name("gender");
+		By dobTextbox = By.name("dob");
+		By addressTextArea = By.name("addr");
+		By cityTextbox= By.name("city");
+		By stateTextbox= By.name("state");
+		By pinTextbox = By.name("pinno");
+		By phoneTextbox= By.name("telephoneno");
+		By emailTextbox= By.name("emailid");
+		By passwordTextbox= By.name("password");
+		
+		emailAddress = getRandomEmail();
+		name = "john Deep";
+		gender = "male";
+		dateOfBirth = "1956-01-01";
+		address = "77 PO Califirnia";
+		state="Hawail";
+		city = "califonia";
+		pin = "2344";
+		phone = "0897444555";
+		
+		loginPageUrl = driver.getCurrentUrl();
+		driver.findElement(By.xpath("//a[text()='here']")).click();
+		
+		driver.findElement(By.name("emailid")).sendKeys(emailAddress);
+		
+		driver.findElement(By.name("btnLogin")).click();
+		
+		userID = driver.findElement(By.xpath("//td[text()='User ID :']/following-sibling::td")).getText();
+		password = driver.findElement(By.xpath("//td[text()='Password :']/following-sibling::td")).getText();
+		
+//		driver.get(loginPageUrl);
+		navigateToUrlByJS("https://demo.guru99.com/v4/");
+		
+		sleepInSecond(5);
+		
+		driver.findElement(By.xpath("//input[@name='uid']")).sendKeys(userID);
+		driver.findElement(By.xpath("//input[@name='password']")).sendKeys(password);
+		driver.findElement(By.name("btnLogin")).click();
+		
+		Assert.assertEquals(driver.findElement(By.xpath("//marquee[@class='heading3']")).getText(), "Welcome To Manager's Page of Guru99 Bank");
+		
+		driver.findElement(By.xpath("//a[text()='New Customer']")).click();
+		
+		driver.findElement(nameTextbox).sendKeys(name);
+		driver.findElement(genderRadio).click();
+		
+		removeAttributeInDOM("//input[@name='dob']","type");
+		
+		sleepInSecond(3);
+		
+		driver.findElement(dobTextbox).sendKeys(dateOfBirth);
+		
+		driver.findElement(addressTextArea).sendKeys(address);
+		driver.findElement(cityTextbox).sendKeys(city);
+		driver.findElement(stateTextbox).sendKeys(state);
+		driver.findElement(pinTextbox).sendKeys(pin);
+		driver.findElement(phoneTextbox).sendKeys(phone);
+		driver.findElement(emailTextbox).sendKeys(emailAddress);
+		driver.findElement(passwordTextbox).sendKeys(password);
+		
+		driver.findElement(By.name("sub")).click();
+		
+		
+	}
+	
 	@Test
-	public void TC_02() {
+	public void TC_04_Regester() {
+		navigateToUrlByJS("http://live.techpanda.org/");
+		clickToElementByJS("//div[@id='header-account']//a[text()='My Account']");
+		
 		
 	}
 	
