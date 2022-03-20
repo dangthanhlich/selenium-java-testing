@@ -1,7 +1,7 @@
 package Javabasic;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
@@ -58,7 +58,7 @@ public class Topic_13_data_Type {
 		WebDriver driver;
 		
 		//collection : List/set/queue
-		List<String> addresses = new ArrayList<String>();
+		List<String> address = new ArrayList<String>();
 		//string - chuỗi kí tự
 		String name = "Automation test";
 		String cityName = new String("Ho chi minh");

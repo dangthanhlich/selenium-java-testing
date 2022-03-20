@@ -63,7 +63,7 @@ public class Topic_class_20_topic22_Handlepopup {
 		Assert.assertFalse(driver.findElement(signInPopup).isDisplayed());
 	}
 	
-	public void TC_02_Shoppe() {
+	public void TC_02_Shoppe1() {
 		driver.get("https://shopee.vn/");
 		By homePopup = By.xpath("//img[@class='banner-image']");
 		//verify signin popup in displayed

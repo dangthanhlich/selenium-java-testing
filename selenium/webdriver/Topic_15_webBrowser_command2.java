@@ -78,14 +78,14 @@ public class Topic_15_webBrowser_command2 {
 		//lấy ra text của element
 		element.getText();
 		driver.get("http://live.techpanda.org/index.php/customer/account/create/");
-		String searchPlaceholder = driver.findElement(By.id("search")).getAttribute("placeholder");
+		//String searchPlaceholder = driver.findElement(By.id("search")).getAttribute("placeholder");
 		System.out.println(searchPlaceholder);
 		String instructionText = driver.findElement(By.cssSelector("p.form-instructions")).getText();
 		System.out.println(instructionText);
 		
 		//điều lấy ra các thuộc tín h CSS | thường dùng để test GUI: font/color/size/location/position ..
 		element.getCssValue("");
-		driver,get("https://www.facebook.com/");
+		driver.get("https://www.facebook.com/");
 		WebElement loginButton = driver.findElement(By.name("login"));
 		System.out.println(loginButton.getCssValue("font-size"));
 		System.out.println(loginButton.getCssValue("background-color"));
@@ -116,10 +116,10 @@ public class Topic_15_webBrowser_command2 {
 		// người dùng có thể nhìn thấy được
 		
 		//nếu như mong đợ hiển thị (kiểu như k nhập yêu cầu được hiển thị vaidation)
-		Asert.asertTrue(element.isDisplayed());
+		Assert.assertTrue(element.isDisplayed());
 		
 		//nếu như mong đợi không hiển thị
-		Assert.assertFalse(element, isDisplayed());
+		Assert.assertFalse(element.isDisplayed());
 		
 		element.isDisplayed();
 		
@@ -127,18 +127,18 @@ public class Topic_15_webBrowser_command2 {
 		//kiểm tra 1 element có thể thao tác được không
 		//read-onlu hoặc disable (kiểu như disable)
 		//mong đợi thao tác được enable
-		Asert.asertTrue(element.isEnabled());
+		Assert.assertTrue(element.isEnabled());
 		//mong đợi nó bị disble/read-only/không thao tác
-		Asert.asertTrue(element.isEnabled());
+		Assert.assertTrue(element.isEnabled());
 		element.isEnabled();
 		
 		//kiểm tra 1 element đã được chọn hay chưa
 		//radio button,checkbox/drpdown
 		element.isSelected();
 		//mong đợi nó đã được chọn rồi
-		Asert.asertTrue(element.isSelected());
+		Assert.assertTrue(element.isSelected());
 		//mong đợi nó chưa chọn/bỏ chọn
-		Asert.asertTrue(element.isSelected());
+		Assert.assertTrue(element.isSelected());
 		
 		
 		//tương ứng với hành động là nhấn phím ENTER trên bàn phím

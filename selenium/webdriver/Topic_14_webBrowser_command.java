@@ -1,5 +1,6 @@
 package webdriver;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -53,7 +54,7 @@ public class Topic_14_webBrowser_command {
 		
 		//tìm nhiều hơn 1 element trên page
 		//trả về data type là List<WebElement>
-		List<webElement> links = driver.findElements(By.xpath("//a"));//**
+		//List<webElement> links = driver.findElements(By.xpath("//a"));//**
 		
 		//trả về URL của page hiện tại
 		String homePageUrl = driver.getCurrentUrl();//**
