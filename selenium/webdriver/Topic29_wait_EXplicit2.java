@@ -1,6 +1,9 @@
 package webdriver;
 
 import java.util.concurrent.TimeUnit;
+
+import javax.xml.crypto.Data;
+
 import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
@@ -24,12 +27,17 @@ public class Topic29_wait_EXplicit2 {
 	By loadingIcon = By.cssSelector("div#loading");
 	By helloWordText = By.xpath("//h4[text()='Hello World!']");
 	
+	String firstFileName = "a1.jpg";
+	String SecondFileName = "a2.jpg";
+	String firstFilePath = projectPath + "\\\\up_load_file\\" + firstFileName;
+	String secondFilePath = projectPath + "\\\\up_load_file\\" + SecondFileName;
+	
 
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
 		driver = new ChromeDriver();
-		expliciWait = new WebDriverWait(driver, 30);
+		expliciWait = new WebDriverWait(driver, 60);
 		driver.manage().window().maximize();
 
 	}
@@ -75,7 +83,31 @@ public class Topic29_wait_EXplicit2 {
 		Assert.assertEquals(driver.findElement(By.id("ctl00_ContentPlaceholder1_Label1")).getText(), "Sunday, March 27, 2022");
 	}
 	
+	@Test
+	public void TC_04_Ajax_loading() {
+		driver.get("https://gofile.io/uploadFiles");
+		driver.findElement(By.xpath("//input[@type='file']")).sendKeys(firstFilePath+"\n"+secondFilePath);
+		//wait to serve icon invisible
+		expliciWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("div#rowUploadProgress-selectServer")));
+		
+		//wait progress bar icon invisible
+		expliciWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@role='progressbar']")));
+		
+		//wait sucess message displayed
+		expliciWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h5[text()='Your files have been successfully uploaded']")));
+		
+		Assert.assertTrue(driver.findElement(By.xpath("//h5[text()='Your files have been successfully uploaded']")).isDisplayed());
 
+		//wait  show file button clickable
+		expliciWait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button#rowUploadSuccess-showFiles")));
+		driver.findElement(By.cssSelector("button#rowUploadSuccess-showFiles")).click();
+		
+		
+		//verify image uploaded success
+		Assert.assertTrue(driver.findElement(By.xpath("//span[@class='contentName' and text()='" + firstFileName +"']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//span[@class='contentName' and text()='" + SecondFileName +"']")).isDisplayed());
+	}
+	
 
 
 	
